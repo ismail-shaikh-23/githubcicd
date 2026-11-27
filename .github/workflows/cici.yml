@@ -1,34 +1,30 @@
-name: CICD Pipeline
+
+name: My First GitHub Action
 
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
+      
+  workflow_dispatch: 
+  
 jobs:
-   checkout:
-     runs-on: ubuntu-slim
-     steps:
-       - name: clone code
-         run: echo "Clone the code from Github"
+  first-job:
+    name: My First Job
+    runs-on: ubuntu-latest
 
-   build:  
-    needs: [checkout]
-    runs-on: ubuntu-slim
     steps:
-      - name: build the docker image
-        run: echo "Building docker image"
+      - name: Print Welcome Message
+        run: echo "Hello from GitHub Actions!"
 
-   test:
-     needs: [build]
-     runs-on: ubuntu-slim
-     steps:
-        - name: run the test cases
-          run: echo "Running test cases here"
-   deploy:
-     needs: [test]
-     runs-on: ubuntu-slim
-     steps:
-      - name: deploy the application
-        run: echo "deploying the app on server"
-        
-    
-     
+      - name: Check Current User
+        run: whoami
+
+      - name: Check Current Directory
+        run: pwd
+
+      - name: Check Linux Version
+        run: cat /etc/os-release
+
+      - name: Check Docker Version
+        run: docker --version
