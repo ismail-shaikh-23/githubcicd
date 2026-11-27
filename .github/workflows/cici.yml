@@ -11,10 +11,24 @@ jobs:
          run: echo "Clone the code from Github"
 
    build:  
+    needs: [checkout]
     runs-on: ubuntu-slim
     steps:
       - name: build the docker image
         run: echo "Building docker image"
 
+   test:
+     needs: [build]
+     runs-on: ubuntu-slim
+     steps:
+        - name: run the test cases
+          run: echo "Running test cases here"
+   deploy:
+     needs: [test]
+     runs-on: ubuntu-slim
+     steps:
+      - name: deploy the application
+        run: echo "deploying the app on server"
+        
     
      
