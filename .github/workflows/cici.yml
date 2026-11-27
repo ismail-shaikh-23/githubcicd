@@ -1,0 +1,20 @@
+name: CICD Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+   checkout:
+     runs-on: ubuntu-slim
+     steps:
+       - name: clone code
+         run: echo "Clone the code from Github"
+
+   build:  
+    runs-on: ubuntu-slim
+    steps:
+      - name: build the docker image
+        run: echo "Building docker image"
+
+    
+     
