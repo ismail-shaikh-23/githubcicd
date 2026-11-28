@@ -1,0 +1,40 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Application
+        run: |
+          mkdir dist
+          echo "Production build" > dist/index.html
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist/
+
+      - name: Verify Build
+        run: ls -la dist/
+
+      - name: Deploy Application
+        run: echo "Deploying application..."
