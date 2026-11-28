@@ -1,0 +1,28 @@
+
+name: Context Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  information:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: GitHub Information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Actor: ${{ github.actor }}"
+
+      - name: Runner Information
+        run: |
+          echo "OS: ${{ runner.os }}"
+          echo "Architecture: ${{ runner.arch }}"
+
+      - name: Project Information
+        env:
+          PROJECT_NAME: mask-messenger
+        run: |
+          echo "Project: $PROJECT_NAME"
+          echo "Project from context: ${{ env.PROJECT_NAME }}"
