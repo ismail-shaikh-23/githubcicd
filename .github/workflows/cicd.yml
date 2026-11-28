@@ -1,0 +1,40 @@
+name: CI/CD Workflow
+
+on:
+    push:
+        branches:
+            - main
+
+    
+    workflow_dispatch:
+        
+jobs:
+    checkout:
+        name: Checkout Code
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+        
+    build:
+        name: Build Application
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Build Application
+              run: echo "Building the application..."
+
+    test:
+        name: Run Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run Tests
+              run: echo "Running tests..."
+    
+    deploy:
+        name: Deploy Application
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy Application
+              run: echo "Deploying the application..."
